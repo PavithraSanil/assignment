@@ -1,6 +1,6 @@
 export default class detailCtrl {
 	/*@ngInject;*/
-	constructor(empService,$scope,$location,$routeParams,$rootScope,$localStorage) {
+	constructor(empService,$scope,$location,$routeParams,$rootScope,$localStorage,$timeout) {
 		console.log("Detail CONTROLLER");
     this.scope = $scope;
 		this.location=$location;
@@ -8,6 +8,7 @@ export default class detailCtrl {
 		this.scope.service=empService;
 		this.rootScope=$rootScope;
 		this.ls=$localStorage;
+		this.timeout=$timeout;
 		// this.ls.sflag=0;
 
 
@@ -111,7 +112,14 @@ export default class detailCtrl {
 	}
 
 	deletemultipe() {
-		console.log("hi;");
+		var count=0;
+		for(var x=0; x<this.scope.emp.length;x++){
+			if(this.scope.toselect[x]==true)
+			count+=1;
+		}
+	var flag=confirm('You have selected '+count+' items to delete and it will remove in 5 seconds after clicking confirm!!');
+	if(flag==true){
+		this.timeout(()=>{
 		for(var x=0; x<this.scope.emp.length;x++){
 			if(this.scope.toselect[x]==true){
 				var id=this.scope.emp[x].cid
@@ -128,5 +136,7 @@ export default class detailCtrl {
 		});
 		}
 	}
+},5000)
+}
 }
 }
