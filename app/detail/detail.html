@@ -1,7 +1,11 @@
 
+     
      <div class="col-sm-9">
        <br />
-        <table class="table table-hover">
+       <button class="btn btn-primary pull-left" ng-click="dc.toggle()" ng-if="sflag">
+          {{!toggleflag && 'Select All' || 'Unselect All'}} </button>
+      <button class="btn btn-primary" ng-click='dc.deletemultipe()' ng-if="sflag">Delete</button>
+        <table class="table table-hover"  ng-click="dc.selectflag()" ng-init="sflag=0">
           <thead>
             <th>CID</th>
             <th>First Name</th>
@@ -10,7 +14,7 @@
             <th>Designation</th>
             <th>Description</th>
           </thead>
-          <tbody ng-repeat="x in emp">
+          <tbody ng-repeat="x in emp" ng-click="dc.toselect($index)">
             <td>{{x.cid}}</td>
             <td>{{x.first_name}}</td>
             <td>{{x.last_name}}</td>
@@ -19,6 +23,7 @@
             <td>{{x.description}}</td>
             <td><button class="btn btn-primary" ng-click='dc.update_call(x.cid)'>Update</button></td>
             <td><button class="btn btn-primary" ng-click='dc.deleterec(x.cid)'>Delete</button></td>
+            <td ng-if="sflag"><input type="checkbox" name="check" ng-checked="toselect[$index]"></td>
           </tbody>
         </table>
           <button class="btn btn-primary" ng-click='dc.create()'>Create New Employee</button>
