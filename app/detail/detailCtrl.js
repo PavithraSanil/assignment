@@ -8,11 +8,18 @@ export default class detailCtrl {
 		this.scope.service=empService;
 		this.rootScope=$rootScope;
 		this.ls=$localStorage;
+		// this.ls.sflag=0;
+
+
 		console.log(this.scope.service.logfunction);
 		if(this.scope.service.logfunction()){
 	    empService.getData().then(emp => {
+
 			    this.scope.emp = emp.data.body;
 			    console.log(this.scope.emp);
+					this.scope.toselect=[];
+					for(var x=0; x<this.scope.emp.length;x++)
+						this.scope.toselect[x]=false;
 					//console.log(this.scope.emp[0].gender);
 
 					for (var index in this.scope.emp) {
@@ -79,4 +86,47 @@ export default class detailCtrl {
 		this.ls.logoutflag=1;
 		this.location.path('/');
 	}
+
+	selectflag() {
+		this.scope.sflag=1;
+	//	console.log(this.ls.sflag);
+	}
+
+	toselect($index){
+		this.scope.toselect[$index]=true;
+	}
+
+	toggle() {
+		console.log(this.scope.toggleflag);
+		if(!this.scope.toggleflag){
+			for(var x=0; x<this.scope.emp.length;x++)
+				this.scope.toselect[x]=true;
+				this.scope.toggleflag=!this.scope.toggleflag;
+		}
+		else  {
+			for(var x=0; x<this.scope.emp.length;x++)
+				this.scope.toselect[x]=false;
+				this.scope.toggleflag=!this.scope.toggleflag;
+		}
+	}
+
+	deletemultipe() {
+		console.log("hi;");
+		for(var x=0; x<this.scope.emp.length;x++){
+			if(this.scope.toselect[x]==true){
+				var id=this.scope.emp[x].cid
+				console.log(this.scope.emp[x].cid);
+		this.scope.service.deleteObj(id).success(res=> {
+			console.log(res.status);
+			if(res.status=="200"){
+				console.log('One record is deleted');
+			this.location.path("reload");
+			}
+			else {
+					console.log('Failed to delete');
+			}
+		});
+		}
+	}
+}
 }
