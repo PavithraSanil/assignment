@@ -1,0 +1,28 @@
+
+     <div class="col-sm-9">
+       <br />
+        <table class="table table-hover">
+          <thead>
+            <th>CID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Designation</th>
+            <th>Description</th>
+          </thead>
+          <tbody ng-repeat="x in emp">
+            <td>{{x.cid}}</td>
+            <td>{{x.first_name}}</td>
+            <td>{{x.last_name}}</td>
+            <td>{{x.gender}}</td>
+            <td>{{x.designation}}</td>
+            <td>{{x.description}}</td>
+            <td><button class="btn btn-primary" ng-click='dc.update_call(x.cid)'>Update</button></td>
+            <td><button class="btn btn-primary" ng-click='dc.deleterec(x.cid)'>Delete</button></td>
+          </tbody>
+        </table>
+          <button class="btn btn-primary" ng-click='dc.create()'>Create New Employee</button>
+    </div>
+    <div class="col-sm-1"  ng-if="logflag">
+      <button ng-click="dc.logout()">Logout</button>
+    </div>

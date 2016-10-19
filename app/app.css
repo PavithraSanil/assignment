@@ -1,0 +1,79 @@
+.header{
+  text-align: center;
+  background-color: black;
+  color: white;
+  height: 80px;
+}
+
+.footer{
+  text-align: center;
+  background-color: black;
+  color: white;
+  height: 30px;
+}
+
+.middle{
+  /*background-color: pink;*/
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf6aE0Pd68Pjodu7KVwwB86IPK5k5jvAjPCNOiofgHGYraeXs8);
+  color: blue;
+}
+.right {
+    background-color: blanchedalmond;
+}
+.col-sm-2 {
+  padding-top: 50px;
+  text-align: center;
+  padding-left: 100px;
+  color: blue;
+  background-color: MistyRose;
+  height:1000px;
+  background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRzf53u50hx522jVDS8WHnTomXGzSpTIG348LmOs99i9IdVElhE);
+}
+
+.login {
+  margin-top: 100px;
+  margin-left: 400px;
+  padding-top: 25px;
+  text-align: center;
+  background-color: lightgrey;
+  width: 500px;
+  height: 400px;
+   background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQrFjHDSsJVaGj-3FGoF_FmnpGdV-aydgyNFBDECqxQFZUVUM3j);
+}
+
+input[type=text],[type=password] {
+  width: 80%;
+   padding: 12px 20px;
+   margin: 8px 0;
+   display: inline-block;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box;
+
+}
+
+.update {
+  margin-left: 300px;
+  margin-right: 100px;
+  padding-top: 25px;
+  height: 650px;
+  text-align: center;
+  /*background-color: lightgrey;*/
+  background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRzf53u50hx522jVDS8WHnTomXGzSpTIG348LmOs99i9IdVElhE);
+
+}
+
+.inner {
+text-align: justify;
+padding-left: 90px;
+}
+
+.labelform .label::after {
+ content:"*";
+ color:red;
+}
+
+a.focus
+{
+  text-decoration: underline;
+}

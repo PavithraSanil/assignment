@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp"  ng-strict-di>
+  <head>
+  	<title>Angular App</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body >
+    <!-- <div ng-if=""> -->
+      <div class="header" ng-if="logflag">
+        <header-directive></header-directive>
+        <hr />
+      </div>
+      <div class="middle">
+        <div class="row">
+          <div class="col-sm-2" ng-if="logflag">
+            <h4 ng-init="state = 'act'"><a href="#/detail" ng-click="state = 'act'" ng-class="{'focus': state=='act'}">Employees</a><br /><br />
+            <a href="#/profile" ng-click="state = 'nonact'" ng-class="{'focus': state=='nonact'}">Profile</a></h4><br/><br /><br />
+
+          </div>
+          <div ng-view></div>
+        </div>
+      </div>
+      <div class="footer" ng-if="logflag">
+        <footer-directive></footer-directive>
+      </div>
+    </div>
+  </body>
+  <script src="libs/angular.min.js"></script>
+  <script src="libs/angular-route.min.js"></script>
+  <script src="libs/ngStorage.min.js"></script>
+  <script src="scripts/app.min.js"></script>
+  <link rel="stylesheet" href="libs/bootstrap.min.css">
+  <script src="libs/bootstrap.min.js"></script>
+</html>

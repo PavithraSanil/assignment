@@ -1,0 +1,28 @@
+<div class="update">
+    <form name="form" class="labelform">
+      <!-- CID:
+        <input type="text" ng-model="emp.cid"><br /><br/> -->
+
+
+        <h4 style="color:blue;">EMPLOYEE PROFILE</h4><br/><br />
+
+
+        <input type="text" ng-model="emp.first_name"  name="fname" placeholder="First Name" ng-pattern="/^[A-Za-z\s]*$/" required><label class="label"></label><br /><br />
+        <span class="alert error" ng-show="form.fname.$error.pattern">Only characters are allowed</span>
+        <input type="text" ng-model="emp.last_name" name="lname" placeholder="Last Name" ng-pattern="/[A-Za-z]/" required><label class="label"></label><br /><br />
+        <span class="alert error" ng-show="form.lname.$error.pattern">Only characters are allowed</span>
+        <input type="text" ng-model="emp.designation" name="desig" placeholder="Designation" ng-pattern="/[A-Za-z]/" required><label class="label"></label><br /><br />
+        <span class="alert error" ng-show="form.desig.$error.pattern">Invalid</span><br/>
+        <input type="text" ng-model="emp.description" name="des" placeholder="Description" ng-pattern="/[A-Za-z]/" required><label class="label"></label><br />
+        <span class="alert error" ng-show="form.des.$error.pattern">Invalid</span><br/>
+        <div class="inner">
+          <p>Gender<label class="label"></label></p>
+          <input type="radio"  ng-model="emp.gender" value="Male" name="gender" required>Male
+          <input type="radio"  ng-model="emp.gender" value="Female" name="gender" required>Female
+        </div>
+        <h1 ng-if="flag==1">
+        <button class="btn btn-primary" ng-click="uc.updateData()" ng-disabled="form.$invalid">Update</button></h1>
+        <h1 ng-if="flag==0">
+        <button class="btn btn-primary" ng-click="uc.createData()" ng-disabled="form.$invalid">Create</button></h1>
+    </form>
+</div>

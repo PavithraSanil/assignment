@@ -1,0 +1,48 @@
+<!-- <link rel="text/css" href="app/app.css"> -->
+<style>
+.header{text-align: center;background-color: grey;}
+.footer{text-align: center;background-color: grey;}
+.middle{background-color: pink;}
+.right{width: 50%;float:left;}
+.left{width: 50%;}
+</style>
+<button ng-click="dc.logout()">Logout</button> 
+<div class="header">
+  <header-directive></header-directive>
+  <hr>
+</div>
+<div class="middle">
+  <h3><a href="">Employees</a></h3>
+  <h3><a href="">Profile</a></h3>
+  <div class="right">
+      <h4>Details</h4>
+      <table border="2">
+        <tr>
+          <th>CID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Gender</th>
+          <th>Designation</th>
+          <th>Description</th>
+        </tr>
+        <tr ng-repeat="x in emp">
+          <td>{{x.cid}}</td>
+          <td>{{x.first_name}}</td>
+          <td>{{x.last_name}}</td>
+          <td>{{x.gender}}</td>
+          <td>{{x.designation}}</td>
+          <td>{{x.description}}</td>
+          <td><button ng-click='dc.update_call(x.cid)'>Update</button></td>
+          <td><button ng-click='dc.deleterec(x.cid)'>Delete</button></td>
+        </tr>
+      </table>
+      <button ng-click='dc.create()'>Create</button>
+  </div>
+  <div class="left">
+    <h4>right</h4>
+  </div>
+</div>
+<div class="footer">
+  <hr>
+  <footer-directive></footer-directive>
+</div>

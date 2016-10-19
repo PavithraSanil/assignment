@@ -1,0 +1,18 @@
+<form>
+  <!-- CID:
+    <input type="text" ng-model="emp.cid"><br /><br/> -->
+  First Name:
+    <input type="text" ng-model="emp.first_name"><br /><br />
+  Last Name:
+    <input type="text" ng-model="emp.last_name"><br /><br />
+  Gender:
+    <input type="text" ng-model="emp.gender"><br /><br />
+  Designation:
+    <input type="text" ng-model="emp.designation"><br /><br />
+  description:
+    <input type="text" ng-model="emp.description"><br /><br /><br />
+    <h1 ng-if="flag==1">
+    <button ng-click="uc.updateData()">Update</button></h1>
+    <h1 ng-if="flag==0">
+    <button ng-click="uc.createData()">Create</button></h1>
+</form>
