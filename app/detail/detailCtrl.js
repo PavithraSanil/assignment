@@ -1,6 +1,6 @@
 export default class detailCtrl {
 	/*@ngInject;*/
-	constructor(empService,$scope,$location,$routeParams,$rootScope,$localStorage,$timeout) {
+	constructor(empService,$scope,$location,$routeParams,$rootScope,$localStorage,$timeout,$interval) {
 		console.log("Detail CONTROLLER");
     this.scope = $scope;
 		this.location=$location;
@@ -9,8 +9,9 @@ export default class detailCtrl {
 		this.rootScope=$rootScope;
 		this.ls=$localStorage;
 		this.timeout=$timeout;
+		this.interval=$interval;
 		// this.ls.sflag=0;
-
+		this.scope.id=[];
 
 		console.log(this.scope.service.logfunction);
 		if(this.scope.service.logfunction()){
@@ -24,6 +25,7 @@ export default class detailCtrl {
 					//console.log(this.scope.emp[0].gender);
 
 					for (var index in this.scope.emp) {
+					//this.scope.emp[index].toselect=false;
 							if(this.scope.emp[index].gender == "0" ){
 								this.scope.emp[index].gender="Female";
 							}
@@ -112,31 +114,49 @@ export default class detailCtrl {
 	}
 
 	deletemultipe() {
-		var count=0;
-		for(var x=0; x<this.scope.emp.length;x++){
-			if(this.scope.toselect[x]==true)
-			count+=1;
-		}
-	var flag=confirm('You have selected '+count+' items to delete and it will remove in 5 seconds after clicking confirm!!');
-	if(flag==true){
-		this.timeout(()=>{
-		for(var x=0; x<this.scope.emp.length;x++){
-			if(this.scope.toselect[x]==true){
-				var id=this.scope.emp[x].cid
-				console.log(this.scope.emp[x].cid);
-		this.scope.service.deleteObj(id).success(res=> {
-			console.log(res.status);
-			if(res.status=="200"){
-				console.log('One record is deleted');
-			this.location.path("reload");
+			var count=0;
+			for(var x=0; x<this.scope.emp.length;x++){
+				if(this.scope.toselect[x]==true)
+				count+=1;
 			}
-			else {
-					console.log('Failed to delete');
-			}
-		});
-		}
+			var flag=confirm('You have selected '+count+' items to delete and it will remove in 5 seconds after clicking confirm!!');
+			if(flag==true){
+				var ar=[];
+					for(var x=0; x<this.scope.emp.length;x++){
+							if(this.scope.toselect[x]==true){
+									ar.push(this.scope.emp[x].cid);
+
+							}
+					}
+					console.log(ar);
+					var i=0;
+					var myTimer =this.interval(()=>{
+						 var j=i++;
+						 console.log(j);
+						if(ar[j]){
+							this.scope.service.deleteObj(ar[j]).success(res=> {
+							console.log("hi",ar[j]);
+							if(res.status=="200"){
+								console.log('One record is deleted');
+								this.location.path("reload");
+
+							}
+							else {
+								console.log('Failed to delete');
+							}
+
+							});
+
+						}else if(!ar[j]){
+						 //console.log(!ar[j]);
+						 clearInterval(myTimer);
+						//this.scope.on('$destroy', ()=> { this.interval.cancel(myTimer); });
+						 }
+
+					 }, 5000)
+
+				}
+
+
 	}
-},5000)
-}
-}
 }
