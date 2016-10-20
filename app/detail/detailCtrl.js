@@ -10,6 +10,8 @@ export default class detailCtrl {
 		this.ls=$localStorage;
 		this.timeout=$timeout;
 		this.interval=$interval;
+		// this.scope.on=$on;
+		// this.destroy=$destroy;
 		// this.ls.sflag=0;
 		this.scope.id=[];
 
@@ -19,9 +21,10 @@ export default class detailCtrl {
 
 			    this.scope.emp = emp.data.body;
 			    console.log(this.scope.emp);
-					this.scope.toselect=[];
+					//this.scope.toselect=[];
 					for(var x=0; x<this.scope.emp.length;x++)
-						this.scope.toselect[x]=false;
+						//this.scope.toselect[x]=false;
+						this.scope.emp[x].toselect=false;
 					//console.log(this.scope.emp[0].gender);
 
 					for (var index in this.scope.emp) {
@@ -96,34 +99,55 @@ export default class detailCtrl {
 	}
 
 	toselect($index){
-		this.scope.toselect[$index]=true;
+		//this.scope.toselect[$index]=true;
+	this.scope.emp[$index].toselect=!this.scope.emp[$index].toselect;
 	}
 
 	toggle() {
-		console.log(this.scope.toggleflag);
-		if(!this.scope.toggleflag){
-			for(var x=0; x<this.scope.emp.length;x++)
-				this.scope.toselect[x]=true;
-				this.scope.toggleflag=!this.scope.toggleflag;
+		var count=0;
+		for(var x=0; x<this.scope.emp.length;x++){
+			//if(this.scope.toselect[x]==true)
+			if(this.scope.emp[x].toselect==true)
+			count+=1;
+		}
+		if(this.scope.emp.length==count)
+			{
+				return true;
+			}
+			else{
+				return false;
+
+			}
+		console.log("hi",this.scope.toggleflag);
+	}
+	select(){
+		if(!this.toggle()){
+			for(var x=0; x<this.scope.emp.length;x++){
+				//this.scope.toselect[x]=true;
+				this.scope.emp[x].toselect=true;
+				console.log(x);
+			}
 		}
 		else  {
 			for(var x=0; x<this.scope.emp.length;x++)
-				this.scope.toselect[x]=false;
-				this.scope.toggleflag=!this.scope.toggleflag;
+				//this.scope.toselect[x]=false;
+				this.scope.emp[x].toselect=false;
 		}
 	}
 
 	deletemultipe() {
 			var count=0;
 			for(var x=0; x<this.scope.emp.length;x++){
-				if(this.scope.toselect[x]==true)
+				//if(this.scope.toselect[x]==true)
+				if(this.scope.emp[x].toselect==true)
 				count+=1;
 			}
 			var flag=confirm('You have selected '+count+' items to delete and it will remove in 5 seconds after clicking confirm!!');
 			if(flag==true){
 				var ar=[];
 					for(var x=0; x<this.scope.emp.length;x++){
-							if(this.scope.toselect[x]==true){
+
+							if(this.scope.emp[x].toselect==true){
 									ar.push(this.scope.emp[x].cid);
 
 							}
@@ -132,7 +156,7 @@ export default class detailCtrl {
 					var i=0;
 					var myTimer =this.interval(()=>{
 						 var j=i++;
-						 //console.log(j);
+						// console.log(j);
 						if(ar[j]){
 							this.scope.service.deleteObj(ar[j]).success(res=> {
 							console.log("hi",ar[j]);
@@ -148,9 +172,9 @@ export default class detailCtrl {
 							});
 
 						}else if(!ar[j]){
-						 //console.log(!ar[j]);
-						 clearInterval(myTimer);
+
 						 this.interval.cancel(myTimer);
+
 						 }
 
 					 }, 5000)
