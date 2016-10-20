@@ -1,9 +1,9 @@
 
-     
+    
      <div class="col-sm-9">
        <br />
-       <button class="btn btn-primary pull-left" ng-click="dc.toggle()" ng-if="sflag">
-          {{!toggleflag && 'Select All' || 'Unselect All'}} </button>
+       <button class="btn btn-primary pull-left" ng-click="dc.select()" ng-if="sflag">
+          {{!dc.toggle() && 'Select All' || 'Unselect All'}} </button>
       <button class="btn btn-primary" ng-click='dc.deletemultipe()' ng-if="sflag">Delete</button>
         <table class="table table-hover"  ng-click="dc.selectflag()" ng-init="sflag=0">
           <thead>
@@ -23,11 +23,12 @@
             <td>{{x.description}}</td>
             <td><button class="btn btn-primary" ng-click='dc.update_call(x.cid)'>Update</button></td>
             <td><button class="btn btn-primary" ng-click='dc.deleterec(x.cid)'>Delete</button></td>
-            <td ng-if="sflag"><input type="checkbox" name="check" ng-checked="toselect[$index]"></td>
+            <td ng-if="sflag"><input type="checkbox" name="check" ng-model="emp[$index].toselect" ng-checked="emp[$index].toselect"></td>
           </tbody>
         </table>
           <button class="btn btn-primary" ng-click='dc.create()'>Create New Employee</button>
     </div>
+
     <div class="col-sm-1"  ng-if="logflag">
       <button ng-click="dc.logout()">Logout</button>
     </div>
