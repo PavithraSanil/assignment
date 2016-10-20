@@ -132,7 +132,7 @@ export default class detailCtrl {
 					var i=0;
 					var myTimer =this.interval(()=>{
 						 var j=i++;
-						 console.log(j);
+						 //console.log(j);
 						if(ar[j]){
 							this.scope.service.deleteObj(ar[j]).success(res=> {
 							console.log("hi",ar[j]);
@@ -150,7 +150,7 @@ export default class detailCtrl {
 						}else if(!ar[j]){
 						 //console.log(!ar[j]);
 						 clearInterval(myTimer);
-						//this.scope.on('$destroy', ()=> { this.interval.cancel(myTimer); });
+						 this.interval.cancel(myTimer);
 						 }
 
 					 }, 5000)
